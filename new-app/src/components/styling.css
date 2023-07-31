@@ -1,0 +1,41 @@
+h1{
+    color:white;
+}
+
+body{
+    background-color:#747972;
+}
+
+p{
+    color:white;
+}
+
+button{
+    background-color: #DDAE98;
+    color: white;
+    font-size: 25px;
+}
+
+table{
+    background-color: lightblue;
+}
+
+th, td {
+    padding: 10px;
+    font-size: 50px;
+    text-align: center;
+}
+
+#navBar{
+    background-color: #3b2f29;
+}
+
+.row2{
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
+}
+
+.column2{
+    border-left: 3px solid black;
+    border-right: 3px solid black;
+}
