@@ -18,6 +18,8 @@ button{
 
 table{
     background-color: lightblue;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 th, td {

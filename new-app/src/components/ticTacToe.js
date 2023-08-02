@@ -3,17 +3,19 @@ import { useState } from 'react';
 
 export default function TicTacToe(){
     let turnTracker = 0; 
-    let letters = ["X","O"];
-    let blankBoard = [" "," "," ","c1r2","c2r2","c3r2","c1r3","c2r3","c3r3"];
+    let letters = ["X","O"]
+    let blankBoard = [1,2,3,4,5,6,7,8,9];
     const [turnMessage, setTurnMessage] = useState("Player 1's Turn");
     const [gameBoard, setGameBoard] = useState(blankBoard);
     
-        const handleClick = () => {
+        const handleClick = (space) => {            
            if(turnTracker%2===0){
-            setGameBoard(letters[0]); //x
+            //setGameBoard2(letters[0]); //x
+            gameBoard[space] = letters[0];
             setTurnMessage("Player 2's Turn");
            }else{
-            setGameBoard(letters[1]); //o
+            //setGameBoard2(letters[1]); //o
+            gameBoard[space] = letters[1];
             setTurnMessage("Player 1's Turn");
            }
            turnTracker = turnTracker+1;
@@ -33,19 +35,22 @@ export default function TicTacToe(){
                         </thead>
                         <tbody id="gameBoard">
                             <tr id="row1">
-                                <td onClick={handleClick} id="row1-column1" class ="column1 row1">{gameBoard[0]}</td>
-                                <td onClick={handleClick} id="row1-column2" class ="column2 row1">{gameBoard[1]}</td>
-                                <td onClick={handleClick} id="row1-column3" class ="column3 row1">{gameBoard[2]}</td>
+                                <td onClick={() => handleClick(0)} id="row1-column1" class ="column1 row1">{gameBoard[0]}</td>
+                                <td onClick={() => handleClick(1)} id="row1-column2" class ="column2 row1">{gameBoard[1]}</td>
+                                <td onClick={() => handleClick(2)}id="row1-column3" class ="column3 row1">{gameBoard[2]}</td>
                             </tr>
                             <tr id="row2">
-                                <td id="row2-column1" class ="column1 row2">x</td>
-                                <td id="row2-column2" class ="column2 row2">x</td>
-                                <td id="row2-column3" class ="column3 row2">x</td>
+                                <td onClick={() => handleClick(3)} id="row2-column1" class ="column1 row2">{gameBoard[3]}</td>
+                                <td onClick={() => handleClick(4)} id="row2-column2" class ="column2 row2">{gameBoard[4]}</td>
+                                <td onClick={() => handleClick(5)} id="row2-column3" class ="column3 row2">{gameBoard[5]}</td>
                             </tr>
                             <tr id="row3">
-                                <td id="row3-column1" class ="column1 row3">x</td>
-                                <td id="row3-column2" class ="column2 row3">x</td>
-                                <td id="row3-column3" class ="column3 row3">x</td>
+                                <td onClick={() => handleClick(6)} id="row3-column1" class ="column1 row3">{gameBoard[6]}</td>
+                                <td onClick={() => handleClick(7)} id="row3-column2" class ="column2 row3">{gameBoard[7]}</td>
+                                <td onClick={() => handleClick(8)} id="row3-column3" class ="column3 row3">{gameBoard[8]}</td>
+                            </tr>
+                            <tr>
+                                <th colspan="3">{gameBoard}</th>
                             </tr>
                         </tbody>
                     </table>
