@@ -4,7 +4,7 @@ import Home from "./home.js";
 import { useState } from 'react';
 
 export default function ShoeButton() {
-    const [Feature, setFeature] = useState("");
+    const [Feature, setFeature] = useState(<Home />);
 
     const handleTicTacToe = () => {
        setFeature(<TicTacToe />);
@@ -17,8 +17,8 @@ export default function ShoeButton() {
     return (
        <div>
             <div id="navBar">
-                <button onClick={handleTicTacToe}>TicTacToe</button>
                 <button onClick={handleHome}>Home</button>
+                <button onClick={handleTicTacToe}>TicTacToe</button>
             </div>
             <div id="feature">
                 {Feature}
