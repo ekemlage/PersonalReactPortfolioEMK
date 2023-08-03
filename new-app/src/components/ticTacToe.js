@@ -36,6 +36,7 @@ export default function TicTacToe(){
         setGameBoard(blankBoard);
         setMessage("");
         setTurnTracker(0);
+        setWon("false");
     }
 
         const handleClick = (space) => {            
