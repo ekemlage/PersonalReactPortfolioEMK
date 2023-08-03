@@ -2,30 +2,66 @@ import "./styling.css";
 import { useState } from 'react';
 
 export default function TicTacToe(){
-    let turnTracker = 0; 
+    const [turnTracker, setTurnTracker] = useState(0); 
     let letters = ["X","O"]
-    let blankBoard = [1,2,3,4,5,6,7,8,9];
+    let blankBoard = ["","","","","","","","",""];
     const [turnMessage, setTurnMessage] = useState("Player 1's Turn");
-    const [gameBoard, setGameBoard] = useState(blankBoard);
+    const [gameBoard, setGameBoard] = useState(blankBoard); //spread + map?
+    const [message, setMessage] = useState("");
+    let winArray = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    const [won, setWon] = useState("false");
     
+    let gradeBoard = function(gameBoard){       
+        for(let i=0; i<winArray.length; i++){
+            let a = winArray[i][0];
+            let b = winArray[i][1];
+            let c = winArray[i][2];
+            if(gameBoard[a]!="" && gameBoard[a]===gameBoard[b] && gameBoard[a]===gameBoard[c]){
+                if(gameBoard[a]===letters[0]){
+                    setMessage(<div><div>Player 1 Wins!</div><button onClick={handleNewGame}>New Game?</button></div>);
+                    setWon("true");
+                }
+                if(gameBoard[a]===letters[1]){
+                    setMessage(<div><div>Player 2 Wins!</div><button onClick={handleNewGame}>New Game?</button></div>);
+                    setWon("true");
+                }   
+            }
+        }
+        if(turnTracker===8 && won==="false"){
+            setMessage(<div><div>Tie Game!</div><button onClick={handleNewGame}>New Game?</button></div>);
+        }
+    }
+
+    const handleNewGame = () => {
+        setGameBoard(blankBoard);
+        setMessage("");
+        setTurnTracker(0);
+    }
+
         const handleClick = (space) => {            
-           if(turnTracker%2===0){
-            //setGameBoard2(letters[0]); //x
-            gameBoard[space] = letters[0];
-            setTurnMessage("Player 2's Turn");
-           }else{
-            //setGameBoard2(letters[1]); //o
-            gameBoard[space] = letters[1];
-            setTurnMessage("Player 1's Turn");
-           }
-           turnTracker = turnTracker+1;
+            if(gameBoard[space]===""){ 
+                if(turnTracker%2===0){ 
+                    gameBoard[space] = letters[0]; //x
+                    setTurnMessage("Player 2's Turn");
+                    gradeBoard(gameBoard);
+                   }else{
+                    gameBoard[space] = letters[1]; //o
+                    setTurnMessage("Player 1's Turn");
+                    gradeBoard(gameBoard);
+                   }   
+                setTurnTracker(turnTracker+1);
+            }else{
+                if(won!="true"){
+                    setMessage("Choose a different space");
+                }
+            }
         }
     
     
     return (
         <div>
             <header>
-                <h1>TicTacToe Function Goes Here</h1>
+                <h1>TicTacToe</h1>
                 <div>
                     <table>
                         <thead>
@@ -50,7 +86,7 @@ export default function TicTacToe(){
                                 <td onClick={() => handleClick(8)} id="row3-column3" class ="column3 row3">{gameBoard[8]}</td>
                             </tr>
                             <tr>
-                                <th colspan="3">{gameBoard}</th>
+                                <th colspan="3">{message}</th>
                             </tr>
                         </tbody>
                     </table>
@@ -59,24 +95,3 @@ export default function TicTacToe(){
         </div>
     );
 }
-
-/*
-win case: 2 diagonal, 3 row, 3 column
-8 win cases
-
-tie if all spaces full and no win case 
-
-2diagonal: 
-r1c1, r2c2, r3c3
-r1c3, r2c2, r3,c1
-
-3row:
-r1c1, r1c2, r1c3
-r2c1, r2c2, r2c3
-r3c1, r3c2, r3c3
-
-3 column:
-r1c1, r2c1, r3c1
-r1c2, r2c2, r3c2
-r1c3. r2c3, r3c3
-*/
