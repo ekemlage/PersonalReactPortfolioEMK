@@ -17,11 +17,11 @@ export default function TicTacToe(){
             let b = winArray[i][1];
             let c = winArray[i][2];
             if(gameBoard[a]!="" && gameBoard[a]===gameBoard[b] && gameBoard[a]===gameBoard[c]){
-                if(gameBoard[a]===letters[0]){
+                if(gameBoard[a]===letters[0] && won ==="false"){
                     setMessage(<div><div>Player 1 Wins!</div><button onClick={handleNewGame}>New Game?</button></div>);
                     setWon("true");
                 }
-                if(gameBoard[a]===letters[1]){
+                if(gameBoard[a]===letters[1] && won ==="false"){
                     setMessage(<div><div>Player 2 Wins!</div><button onClick={handleNewGame}>New Game?</button></div>);
                     setWon("true");
                 }   
@@ -40,14 +40,16 @@ export default function TicTacToe(){
     }
 
         const handleClick = (space) => {            
-            if(gameBoard[space]===""){ 
+            if(gameBoard[space]==="" && won==="false"){ 
                 if(turnTracker%2===0){ 
                     gameBoard[space] = letters[0]; //x
                     setTurnMessage("Player 2's Turn");
+                    setMessage("");
                     gradeBoard(gameBoard);
                    }else{
                     gameBoard[space] = letters[1]; //o
                     setTurnMessage("Player 1's Turn");
+                    setMessage("");
                     gradeBoard(gameBoard);
                    }   
                 setTurnTracker(turnTracker+1);
