@@ -23,7 +23,6 @@ table{
 }
 
 th, td {
-    padding: 10px;
     font-size: 50px;
     text-align: center;
 }
@@ -40,4 +39,9 @@ th, td {
 .column2{
     border-left: 3px solid black;
     border-right: 3px solid black;
+}
+
+.gameBoard{
+    width: 120px;
+    height:120px;
 }
